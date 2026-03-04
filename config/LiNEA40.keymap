@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -103,6 +103,7 @@
         };
 
         // 高速タイピング中のShift誤発動を防ぐhold-tap
+
         hm: homerow_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -144,7 +145,7 @@
 &kp EXCLAMATION  &kp AT  &kp HASH  &kp DOLLAR  &kp PERCENT                    &kp CARET       &kp AMPERSAND  &kp ASTERISK      &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
 &trans           &trans  &trans    &trans      &trans                         &kp MINUS       &kp EQUAL      &kp LEFT_BRACKET  &kp RIGHT_BRACKET     &kp BACKSLASH
 &trans           &trans  &trans    &trans      &trans                         &kp UNDERSCORE  &kp PLUS       &kp LEFT_BRACE    &kp RIGHT_BRACE       &kp PIPE
-&kp LEFT_SHIFT   &trans  &trans    &trans      &trans       &trans    &trans  &trans                         &trans            &trans                &trans
+&trans           &trans  &trans    &trans      &trans       &trans    &trans  &trans                         &trans            &trans                &trans
             >;
 
             sensor-bindings = <&inc_dec_kp LG(PLUS) LG(MINUS)>;
@@ -154,7 +155,7 @@
             bindings = <
 &kp TAB         &kp ESCAPE  &kp LC(E)     &trans          &trans                       &trans        &kp EQUAL       &kp UP_ARROW    &kp MINUS        &kp BACKSPACE
 &kp LC(A)       &trans      &kp LEFT_ALT  &kp LEFT_SHIFT  &trans                       &kp ASTERISK  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp SQT
-&kp LEFT_SHIFT  &trans      &trans        &trans          &trans                       &trans        &trans          &trans          &trans           &trans
+&kp LEFT_SHIFT  &trans      &trans        &trans          &trans                       &trans        &trans          &trans          &trans           &kp GRAVE
 &trans          &trans      &trans        &trans          &trans  &trans    &kp SPACE  &kp ENTER                     &trans          &trans           &trans
             >;
         };
