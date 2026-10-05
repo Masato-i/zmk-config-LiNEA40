@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -176,10 +176,10 @@
 
         FUNCTION {
             bindings = <
-&kp F1  &kp F2  &kp F3  &kp F4   &kp F5                     &trans  &trans  &trans  &trans  &trans
-&kp F6  &kp F7  &kp F8  &kp F9   &kp F10                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &kp F11  &kp F12                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans   &trans   &trans    &trans  &trans          &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_LEFT SCRL_RIGHT>;
@@ -187,10 +187,10 @@
 
         NUMBER {
             bindings = <
-&trans     &trans         &trans                &trans                    &trans                               &kp SLASH     &kp N7        &kp N8        &kp N9        &kp F12
-&trans     &trans         &trans                &trans                    &trans                               &kp ASTERISK  &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp MINUS
+&kp F1     &kp F2         &kp F3                &kp F4                    &kp F5                               &kp SLASH     &kp N7        &kp N8        &kp N9        &kp F12
+&kp F6     &kp F7         &kp F8                &kp F9                    &kp F10                              &kp ASTERISK  &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp MINUS
 &kp LG(Z)  &kp LG(LS(Z))  &kp LG(LS(NUMBER_4))  &kp LG(LS(LC(NUMBER_4)))  &kp LG(LS(N5))                       &trans        &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp PLUS
-&trans     &trans         &trans                &trans                    &trans          &trans    &kp SPACE  &kp N0                      &trans        &trans        &kp EQUAL
+&kp F11    &kp F12        &trans                &trans                    &trans          &trans    &kp SPACE  &kp N0                      &trans        &trans        &kp EQUAL
             >;
         };
 
