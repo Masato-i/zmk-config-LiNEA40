@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -145,10 +145,10 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &kp F3  &trans    &trans                      &trans  &trans    &trans    &trans  &trans
-&trans  &trans  &trans  &mkp MB4  &mkp MB5                    &trans  &mkp MB1  &mkp MB2  &trans  &trans
-&trans  &trans  &trans  &trans    &trans                      &trans  &trans    &trans    &trans  &trans
-&trans  &trans  &trans  &trans    &trans    &trans    &trans  &trans            &trans    &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB1  &mkp MB2  &kp F3  &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB5  &trans    &trans    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans  &trans
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -187,10 +187,10 @@
 
         NUMBER {
             bindings = <
-&trans        &trans         &trans                &trans                    &trans                               &trans        &trans        &trans        &trans        &kp F12
-&kp NUMBER_1  &kp NUMBER_2   &kp NUMBER_3          &kp NUMBER_4              &kp NUMBER_5                         &kp NUMBER_6  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0
-&kp LG(Z)     &kp LG(LS(Z))  &kp LG(LS(NUMBER_4))  &kp LG(LS(LC(NUMBER_4)))  &kp LG(LS(N5))                       &trans        &trans        &trans        &trans        &trans
-&trans        &trans         &trans                &trans                    &trans          &trans    &kp SPACE  &kp ENTER                   &trans        &trans        &trans
+&trans     &trans         &trans                &trans                    &trans                               &kp SLASH     &kp N7        &kp N8        &kp N9        &kp F12
+&trans     &trans         &trans                &trans                    &trans                               &kp ASTERISK  &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp MINUS
+&kp LG(Z)  &kp LG(LS(Z))  &kp LG(LS(NUMBER_4))  &kp LG(LS(LC(NUMBER_4)))  &kp LG(LS(N5))                       &trans        &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp PLUS
+&trans     &trans         &trans                &trans                    &trans          &trans    &kp SPACE  &kp N0                      &trans        &trans        &kp EQUAL
             >;
         };
 
