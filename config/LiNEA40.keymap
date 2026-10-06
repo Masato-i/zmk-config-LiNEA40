@@ -11,8 +11,8 @@
 #define MOUSE 1
 #define MARK 2
 #define CURSOR 3
-#define FUNCTION 4
-#define SCROLL 5
+#define SCROLL 4
+#define NUMBER 5
 #define WIRELESS 6
 
 //mouse cursol
@@ -47,7 +47,7 @@
 
 &msc_input_listener {
     speed_up {
-        layers = <FUNCTION>;
+        layers = <SCROLL>;
         input-processors = <&zip_wheel_scaler 3 1>; //スクロールを3倍速にする
     };
 };
@@ -134,7 +134,7 @@
 
         default_layer {
             bindings = <
-&kp Q             &kp W                &kp E             &kp R    &kp T                                  &kp Y        &kp U  &kp I            &kp O          &kp P
+&kp Q             &kp W                &kp E             &kp R    &kp T                                  &kp Y        &kp U  &lt 4 I          &kp O          &kp P
 &kp A             &kp S                &kp D             &kp F    &kp G                                  &kp H        &kp J  &kp K            &kp L          &kp SEMICOLON
 &hm LEFT_SHIFT Z  &kp X                &kp C             &kp V    &kp B                                  &kp N        &kp M  &kp COMMA        &kp DOT        &kp SLASH
 &kp LEFT_COMMAND  &mt RIGHT_ALT GRAVE  &kp LEFT_CONTROL  &kp INS  &mo 3  &lt 5 BACKSPACE    &lt 2 SPACE  &lt 4 ENTER         &kp RIGHT_SHIFT  &kp BACKSLASH  &lt 6 SINGLE_QUOTE
@@ -174,7 +174,7 @@
             >;
         };
 
-        FUNCTION {
+        SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
