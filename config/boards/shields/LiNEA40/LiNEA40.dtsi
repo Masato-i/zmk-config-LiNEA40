@@ -99,3 +99,13 @@
         status = "disabled";
     };
 };
+
+// DYA Studio 対応 (Zephyr 4.1): CONFIG_NFCT_PINS_AS_GPIOS は廃止され、UICR の指定に変わった。
+//   LiNEA40 は NFC ピン (P0.09 = NFC1, P0.10 = NFC2) を右手の CS / 左右の col に使うため必須。
+&uicr {
+    nfct-pins-as-gpios;
+};
+
+// D6 / D7 は右手のトラックボール IRQ・col3、左手のエンコーダ・col3 に使っているため、
+//   同じピンの UART (xiao_serial) は無効化しておく。
+&xiao_serial { status = "disabled"; };
