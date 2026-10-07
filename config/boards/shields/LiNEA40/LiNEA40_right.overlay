@@ -42,7 +42,7 @@
         x = <900>;
         y = <300>;
         linked-device-identifiers = "mouse", "scroll";
-        linked-subsystems = "cormoran_rip";
+        linked-subsystems = "cormoran_rip", "cormoran_rip";   // identifiers と同じ長さにする (static assert)
     };
 };
 
