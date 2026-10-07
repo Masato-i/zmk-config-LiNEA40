@@ -1,4 +1,11 @@
 #include "LiNEA40.dtsi"
+// DYA Studio 対応: 入力イベントコード (INPUT_EV_REL / INPUT_REL_X/Y) を先に定義する。
+//   後で include する runtime-input-processor.dtsi がこれらのマクロを参照するため、順序を逆にするとパースエラーになる。
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <input/processors.dtsi>
+// Runtime Input Processor の既定ノード (mouse_ / scroll_runtime_input_processor)
+#include <input/processors/runtime-input-processor.dtsi>
+
 &default_transform {
     col-offset = <6>;
 };
@@ -15,12 +22,51 @@
 
 / {
     trackball_listener {
+        status = "okay";
         compatible = "zmk,input-listener";
         device = <&trackball>;
+        // mouse → scroll の 2 段チェーン。
+        //   mouse は全レイヤーで有効 (Temp-Layer でオートマウスレイヤーを実現)。
+        //   scroll は active-layers のレイヤーでのみ XY→スクロール変換し、それ以外は素通し。
+        //   どちらも DYA Studio の Trackball タブから実行時に変更できる。
+        input-processors = <&mouse_runtime_input_processor &scroll_runtime_input_processor>;
+    };
 
+    // DYA Studio のプレビューにトラックボールを描くためのノード (見た目だけ、動作には影響しない)。
+    //   座標はキーの物理レイアウト (LiNEA40.dtsi) と同じ単位 (キー 1 つ = 100)。
+    //   右手親指列の x=900 (x=800 と x=1000 の間) が空いているのでそこに置く。ずれていたら x/y を調整する。
+    trackball_layout: trackball_layout {
+        compatible = "cormoran,physical-layout-trackball";
+        display-name = "Trackball";
+        size = <100>;
+        x = <900>;
+        y = <300>;
+        linked-device-identifiers = "mouse", "scroll";
+        linked-subsystems = "cormoran_rip", "cormoran_rip";   // identifiers と同じ長さにする (static assert)
     };
 };
 
+// オートマウスレイヤー (旧 inorichi ドライバの automouse-layer = <1> + AUTOMOUSE_TIMEOUT_MS=600 の代替)。
+//   トラックボールを動かすと MOUSE レイヤー(1) を有効化し、操作停止 600ms 後、
+//   または MOUSE レイヤーで &trans のキーを押した時点で解除する (クリックキーは維持)。
+&mouse_runtime_input_processor {
+    temp-layer-enabled;
+    temp-layer = <1>;                          // MOUSE レイヤー
+    temp-layer-activation-delay-ms = <0>;
+    temp-layer-deactivation-delay-ms = <600>;
+};
+
+// スクロール (旧 scroll-layers = <4> + SCROLL_TICK=5 の代替)。
+//   active-layers はビットマスク (bit4 = SCROLL レイヤー(4) = I キー / Enter キー長押し)。
+//   scale-divisor 5 ≒ 旧 SCROLL_TICK=5 (5 カウントで 1 ノッチ)。大きいほど遅い。
+//   y-invert は旧ドライバ (INVERT_SCROLL_Y=n) と同じ向きにするため。逆なら外すか Studio で反転。
+&scroll_runtime_input_processor {
+    xy-to-scroll-enabled;
+    active-layers = <0x10>;     // 1 << 4 = SCROLL レイヤー(4)
+    scale-multiplier = <1>;
+    scale-divisor = <5>;
+    y-invert;
+};
 
 &pinctrl {
     spi0_default: spi0_default {
@@ -53,18 +99,18 @@
 
     trackball: trackball@0 {
         status = "okay";
-        compatible = "pixart,pmw3610";
+        // DYA Studio 対応: cormoran 版ドライバ (Studio RPC 付き)。旧 inorichi 版は "pixart,pmw3610"。
+        //   automouse-layer / snipe-layers / scroll-layers はこのドライバには無く、
+        //   上の runtime input processor で実現する。向きは Kconfig (INVERT_X/Y, SWAP_XY) か Studio で指定。
+        compatible = "cormoran,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&xiao_d 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; //MOT-D6
-        automouse-layer = <1>;
-        snipe-layers = <2>;
-        scroll-layers = <4>;
-        //scroll-layers = <4 5 6>;
+        cpi = <1200>;               // 旧 CONFIG_PMW3610_CPI=1200
+        // Studio 上でこのセンサーを識別する名前。保存キーは "<項目>@ball"
+        settings-id = "ball";
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
     };
-};
-
-&trackball_listener {
-    status = "okay";
-    device = <&trackball>;
 };

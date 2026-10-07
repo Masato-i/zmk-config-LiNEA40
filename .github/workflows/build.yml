@@ -2,4 +2,6 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.2.1
+    # ZMK 本体は cormoran/zmk main+dya (Zephyr 4.1) だが、この再利用ワークフローは
+    # ZMK のバージョンとは独立しており v0.3 のもので 4.1 もビルドできる (CLine46 実績)
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
